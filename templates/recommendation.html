@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recommendations - Book Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Book Recommender</div>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('history') }}">History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <main class="page-container">
+        <section class="hero-section">
+            <h1>Recommendations for "{{ query }}"</h1>
+            <p>These books are selected based on your search query.</p>
+        </section>
+
+        {% if recommendations %}
+        <section class="results-panel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>Year</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in recommendations %}
+                    <tr>
+                        <td>{{ book.book_id }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.authors }}</td>
+                        <td>{{ book.original_publication_year }}</td>
+                        <td>{{ book.average_rating }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        {% else %}
+        <section class="results-panel empty">
+            <p>No recommendations were found for this title.</p>
+        </section>
+        {% endif %}
+
+        <div class="page-actions">
+            <a class="button secondary" href="{{ url_for('home') }}">Search another book</a>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

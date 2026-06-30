@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} - Book Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="auth-screen">
+        <div class="auth-card">
+            <h1>{{ title }}</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <form method="post" action="{{ form_action }}">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required />
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required />
+
+                {% if title == 'Register' %}
+                <label for="confirm_password">Confirm Password</label>
+                <input id="confirm_password" name="confirm_password" type="password" required />
+                {% endif %}
+
+                <button class="button" type="submit">{{ button_text }}</button>
+            </form>
+            <p class="small-text">{{ alternate_text }} <a href="{{ alternate_url }}">{{ alternate_label }}</a></p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

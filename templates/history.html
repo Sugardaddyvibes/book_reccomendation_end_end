@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>History - Book Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Book Recommender</div>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('history') }}">History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <main class="page-container">
+        <section class="hero-section">
+            <h1>Your search history</h1>
+            <p>Review the books you searched and the recommendations you received.</p>
+        </section>
+
+        {% if history_items %}
+        <section class="history-panel">
+            {% for item in history_items %}
+            <div class="history-card">
+                <div class="history-meta">
+                    <div><strong>Query:</strong> {{ item.query }}</div>
+                    <div><strong>When:</strong> {{ item.created_at }}</div>
+                    <div><strong>Results:</strong> {{ item.results | length }}</div>
+                </div>
+                <ul>
+                    {% for book in item.results[:5] %}
+                    <li>{{ book.title }} • {{ book.authors }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </section>
+        {% else %}
+        <section class="history-panel empty">
+            <p>You have no saved searches yet. Search for a book on the home page.</p>
+        </section>
+        {% endif %}
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

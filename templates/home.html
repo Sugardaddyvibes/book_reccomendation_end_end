@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home - Book Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Book Recommender</div>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('history') }}">History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <main class="page-container">
+        <section class="hero-section">
+            <h1>Welcome back, {{ username }}!</h1>
+            <p>Type a book title like <strong>Harry Potter</strong> and get recommendations instantly.</p>
+        </section>
+        <section class="search-panel">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('recommend') }}" method="post" class="search-form">
+                <label for="book_name">Book title</label>
+                <input id="book_name" name="book_name" type="text" placeholder="Enter a book title" required />
+
+                <label for="top_n">How many results?</label>
+                <select id="top_n" name="top_n">
+                    <option value="5" selected>5</option>
+                    <option value="7">7</option>
+                    <option value="10">10</option>
+                </select>
+
+                <button class="button" type="submit">Get recommendations</button>
+            </form>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

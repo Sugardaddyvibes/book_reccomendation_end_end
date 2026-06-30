@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Recommendation Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="hero-page">
+        <div class="hero-card">
+            <img class="hero-image" src="{{ url_for('static', filename='images/book-placeholder.svg') }}" alt="Book" />
+            <div class="hero-copy">
+                <h1>Book recommender</h1>
+                <p>Login or register to discover personalized book recommendations for your next read.</p>
+                <div class="hero-buttons">
+                    <a class="button" href="{{ url_for('login') }}">Login</a>
+                    <a class="button secondary" href="{{ url_for('register') }}">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

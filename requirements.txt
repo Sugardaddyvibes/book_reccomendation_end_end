@@ -1,0 +1,33 @@
+# Core data handling
+numpy==1.26.4
+pandas==2.2.2
+Flask==2.3.3
+
+# ML / classical models
+scikit-learn==1.4.2
+
+# NLP
+nltk==3.8.1
+spacy==3.7.4
+
+# Word embeddings
+gensim==4.3.2
+
+# Deep learning (optional but useful)
+tensorflow==2.16.1
+
+# Visualization
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Jupyter
+jupyter==1.0.0
+ipykernel==6.29.4
+
+# Utility
+scipy==1.13.1
+joblib==1.4.2
+tqdm==4.66.4
+
+
+-e .
